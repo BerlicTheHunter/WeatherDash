@@ -1,0 +1,21 @@
+body{
+    background: url(/photos/rain.jpg);
+    background-size:cover;
+    color:white;
+}
+
+#currentWeather{
+    color:black;
+    background-color:white;
+}
+header{
+    background-image: linear-gradient(to right, blue,rgb(25, 26, 68) );
+}
+
+ul{
+    list-style-type: none;
+}
+
+.futureCard{
+    background-color: rgb(25, 26, 68);
+}
