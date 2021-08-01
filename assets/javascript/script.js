@@ -1,8 +1,20 @@
-// ...............OpenWeather API Info
+// ...............OpenWeather API Info...............\\
 // API Key = c217ece50a8addb1ac8b2f4eb17981a4
 const owKey = 'c217ece50a8addb1ac8b2f4eb17981a4';
-var lat=0;
-var lon=0;
+var lat;
+var lon;
+
+// ...............Use Geolocation for Weather before First Search...............\\
+navigator.geolocation.getCurrentPosition(success);
+function success(pos){
+    lat= pos.coords.latitude;
+    lon= pos.coords.longitude;
+    lat= lat.toString();
+    lon= lon.toString();
+    getWeather(lat,lon);
+}
+
+
 // Openweather OneCall APi
 // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 // {lat}= latitude
@@ -15,48 +27,42 @@ var lon=0;
 // {state code}= not used  
 // {country code}= not used
 // {limit}= 3
-getLatLon();
-console.log(lat);
-console.log(lon); 
-
-
 
 function getLatLon(){
-fetch("http://api.openweathermap.org/geo/1.0/direct?q=Columbus&limit=3&appid="+owKey)
-.then(
-    function(response){
-        if(response.status !== 200){
-            console.log("error with request:"+response.status);
-            return;
-        }
-
+    fetch("http://api.openweathermap.org/geo/1.0/direct?q=Columbus&limit=3&appid="+owKey)
+    .then(
+        function(response){
+            if(response.status !== 200){
+                console.log("error with request:"+response.status);
+                return;
+            }
+        
         response.json().then(function(data){
             console.log(data);
-             lat= data[0].lat;
-             lon= data[0].lon;
-             lat= lat.toString();
-             lon= lon.toString();
+            lat= data[0].lat;
+            lon= data[0].lon;
+            lat= lat.toString();
+            lon= lon.toString();
             getWeather(lat,lon);
             });
-            
-
-    }
-)};
-
-function getWeather(lat,lon){
-fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minuetly,hourly,alerts&appid='+owKey)
-.then(
-    function(response){
-        if(response.status !== 200){
-            console.log("error with request:"+response.status);
-            return;
         }
+    )    
+};
 
-        response.json().then(function(data){
-            console.log(data);
-           
-        });
-    }
-)
+function getWeather(){
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly,alerts&appid='+owKey)
+    .then(
+        function(response){
+            if(response.status !== 200){
+                console.log("error with request:"+response.status);
+                return;
+            }
+            response.json().then(function(data){
+                console.log(data);
+                weatherData = data;
+            
+            });
+        }
+    )
 }
 
