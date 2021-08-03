@@ -143,6 +143,7 @@ function makeSavedBtns(){
         };
         console.log(savedBtnCity);
         saveBtnEl.innerHTML= savedBtnCity;
+        var savedBtn= document.getElementsByClassName("saved");
     };
 };
 
@@ -161,11 +162,17 @@ searchBtn.addEventListener("click",function(){
     };
 });
 
-Array.from(savedBtn).forEach(function(index){
-    index.addEventListener("click",function(){
-        console.log(this.innerHTML);
-        searchCity=this.innerText;
-        getLatLon(searchCity);
-    });
-}
-);
+for(i=0; i< savedBtn.length; i++){
+    savedBtn[i].addEventListener("click",function(){
+        searchCity= saveBtn.innerHTML;
+        getLetLon(searchCity);
+
+
+// Array.from(savedBtn).forEach(function(index){
+//     index.addEventListener("click",function(){
+//         console.log(this.innerHTML);
+//         searchCity=this.innerText;
+//         getLatLon(searchCity);
+//     });
+// }
+// );
