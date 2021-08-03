@@ -101,7 +101,7 @@ function getWeather(){
                         weatherULEl[i].innerHTML= "<li><img src='https://openweathermap.org/img/wn/"+iconID.toString()+".png'></li><li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li> <li id='uvI'>UV Index: "+uvIndex.toString()+"</li>";
                     }
                     else{
-                        weatherULEl[i].innerHTML= "<li><label>Date:</label>"+dateFormatted+"</li> <li><img src='http://openweathermap.org/img/wn/"+iconID.toString()+".png'></li> <li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li>"
+                        weatherULEl[i].innerHTML= "<li><label>Date:</label>"+dateFormatted+"</li> <li><img src='https://openweathermap.org/img/wn/"+iconID.toString()+".png'></li> <li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li>"
                     }
                 };
                 return;
