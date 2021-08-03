@@ -17,26 +17,26 @@
         <aside class="col-3 col-md-2 aligh-item-center">
             <div class="align-items-center">
                 <label class="fw-bold " for="search">Search for a City:</label>
-                <Input class= "w-100" type= "text" name="search">
-                <Button class="btn my-2 btn-primary w-100">Search</Button>
+                <Input class= "w-100" type= "text" name="search" id="citySearch">""</input>
+                <Button class="btn my-2 btn-primary w-100" id="searchBtn">Search</Button>
             </div>
             <hr/>
-            <div>
+            <div id="saveBtnEl">
                 <!-- Insert Search Result Buttons -->
             </div>
         </aside>
         
         <article class="col-9 col-md-10 ">
             <div class= "border border-dark border-2 px-1 shadow rounded" id="currentWeather">
-                <h2>Atlanta (3/30/2021) &#X1F327 </h2>
-                <ul id="currentDataList">
+                <h2 id= "currentDataList">Atlanta (3/30/2021) &#X1F327 </h2>
+                <ul>
                     
                 </ul>
             </div>
             <div class="row justify-content-around my-2 p-2 " id= "5day">
                 <h3 class="col-12">5 Day Forecast</h3>
                 <div class="futureCard col-12 col-lg-2 text-light border border-dark rounded">
-                    <ul id="dayOne" class="align-items-left">
+                    <ul id="dayOne" >
                         <li>3/31/2021</li>
                         <li>&#x1F326</li>
                         <li>Temp: 73.72 F</li>

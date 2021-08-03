@@ -4,6 +4,10 @@ body{
     color:white;
 }
 
+hr{
+    color: gray;
+}
+
 #currentWeather{
     color:black;
     background-color:white;
@@ -17,5 +21,13 @@ ul{
 }
 
 .futureCard{
-    background-color: rgb(25, 26, 68);
+    background-color: rgb(49, 49, 75);
+}
+
+li{
+    text-align: left;
+}
+
+label{
+    margin-right: 15px;
 }
