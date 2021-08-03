@@ -41,7 +41,7 @@ const owKey = 'c217ece50a8addb1ac8b2f4eb17981a4';
 // {limit}= 3
 
 function getLatLon(){
-    fetch("http://api.openweathermap.org/geo/1.0/direct?q="+searchCity+"&limit=3&appid="+owKey)
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q="+searchCity+"&limit=3&appid="+owKey)
     .then(
         function(response){
             if(response.status !== 200){
@@ -98,7 +98,7 @@ function getWeather(){
                     if (i === 0){
                         currentDataList.innerText= searchCity +"  ("+dateFormatted+")";
 
-                        weatherULEl[i].innerHTML= "<li><img src='http://openweathermap.org/img/wn/"+iconID.toString()+".png'></li><li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li> <li id='uvI'>UV Index: "+uvIndex.toString()+"</li>";
+                        weatherULEl[i].innerHTML= "<li><img src='https://openweathermap.org/img/wn/"+iconID.toString()+".png'></li><li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li> <li id='uvI'>UV Index: "+uvIndex.toString()+"</li>";
                     }
                     else{
                         weatherULEl[i].innerHTML= "<li><label>Date:</label>"+dateFormatted+"</li> <li><img src='http://openweathermap.org/img/wn/"+iconID.toString()+".png'></li> <li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li>"
