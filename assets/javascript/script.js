@@ -166,7 +166,7 @@ for(i=0; i< savedBtn.length; i++){
     savedBtn[i].addEventListener("click",function(){
         searchCity= saveBtn.innerHTML;
         getLetLon(searchCity);
-
+    };
 
 // Array.from(savedBtn).forEach(function(index){
 //     index.addEventListener("click",function(){
