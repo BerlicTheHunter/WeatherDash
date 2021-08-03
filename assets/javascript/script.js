@@ -7,19 +7,24 @@ var searchCityEl= document.getElementById("citySearch");
 var searchCity= searchCityEl.innerText;
 var searchBtn= document.getElementById('searchBtn');
 var saveBtnEl= document.getElementById('saveBtnEl');
-var savedBtn= document.getElementsByClassName("saved")
+var savedBtn= document.querySelectorAll("saved")
+
 //Use Geolocation for Weather before First Search\\
-if (searchCity==""){
-    navigator.geolocation.getCurrentPosition(success);
-    function success(pos){
-    lat= pos.coords.latitude;
-    lon= pos.coords.longitude;
-    lat= lat.toString();
-    lon= lon.toString();
-    searchCity= "Current Location";
-    console.log(searchCity);
-    getWeather(lat,lon,searchCity);
-}};
+function currentLocal(){
+    if (searchCity==""){
+        navigator.geolocation.getCurrentPosition(success);
+        function success(pos){
+        lat= pos.coords.latitude;
+        lon= pos.coords.longitude;
+        lat= lat.toString();
+        lon= lon.toString();
+        searchCity= "Current Location";
+        console.log(searchCity);
+        getWeather(lat,lon,searchCity);
+        }
+    };
+};
+
 //OpenWeather API Info\\
 const owKey = 'c217ece50a8addb1ac8b2f4eb17981a4';
 // Openweather OneCall APi\\
@@ -60,7 +65,8 @@ function getLatLon(){
             };
         });
         }
-    )    
+    )
+    
 };
 
 function getWeather(){
@@ -98,8 +104,8 @@ function getWeather(){
                         weatherULEl[i].innerHTML= "<li><label>Date:</label>"+dateFormatted+"</li> <li><img src='http://openweathermap.org/img/wn/"+iconID.toString()+".png'></li> <li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li>"
                     }
                 };
-
-            });
+                return;
+            })
             
         }
     )
@@ -109,14 +115,16 @@ function savedSearches(){
     if(localStorage.savedCity == undefined){
         var savedCity=[searchCity];       
         localStorage.savedCity= JSON.stringify(savedCity);
-    }
-    else{
-        var newSearch=[searchCity];
-        var currentList = localStorage.savedCity
-        var savedCity= JSON.parse(currentList);
-        savedCity= savedCity.concat(newSearch);
-        localStorage.savedCity= JSON.stringify(savedCity);
-    }
+    };
+    var newSearch=[searchCity];
+    var currentList = localStorage.savedCity
+    var savedCity= JSON.parse(currentList);
+    
+    if(!savedCity.includes(searchCity)){
+    savedCity= savedCity.concat(newSearch);
+    localStorage.savedCity= JSON.stringify(savedCity);
+    };
+    
     makeSavedBtns();
 };    
   
@@ -138,20 +146,26 @@ function makeSavedBtns(){
     };
 };
 
+currentLocal();
 makeSavedBtns();
 var savedBtn= document.getElementsByClassName("saved");
 
 searchBtn.addEventListener("click",function(){
     console.log("clicked");
     searchCity= searchCityEl.value;
-    console.log(searchCity);
-    getLatLon(searchCity);
+    if(searchCity==""){
+        currentLocal();
+    }
+    else{
+        getLatLon(searchCity);
+    };
 });
 
-for (i of savedBtn){
-    i.addEventListener("click",function(){
-        console.log(this.innerText);
+Array.from(savedBtn).forEach(function(index){
+    index.addEventListener("click",function(){
+        console.log(this.innerHTML);
         searchCity=this.innerText;
         getLatLon(searchCity);
     });
-};
+}
+);
