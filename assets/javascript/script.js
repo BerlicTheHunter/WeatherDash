@@ -56,7 +56,6 @@ function getLatLon(){
                 lon= data[0].lon;
                 lat= lat.toString();
                 lon= lon.toString();
-                console.log(searchCity);
                 getWeather(lat,lon,searchCity);
                 savedSearches(searchCity);
             }
@@ -79,7 +78,6 @@ function getWeather(){
             response.json()
             .then(function(data){
                 console.log(data);
-               
                 for(i=0; i< weatherULEl.length; i++){
                     var tempDay=data.daily[i].temp.day;
                     var windSpeed=data.daily[i].wind_speed;
@@ -97,14 +95,23 @@ function getWeather(){
                     // writes the current weather to the UL for current weather
                     if (i === 0){
                         currentDataList.innerText= searchCity +"  ("+dateFormatted+")";
-
                         weatherULEl[i].innerHTML= "<li><img src='https://openweathermap.org/img/wn/"+iconID.toString()+".png'></li><li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li> <li id='uvI'>UV Index: "+uvIndex.toString()+"</li>";
+                        var uvIEl= document.getElementById('uvI');
+                        console.log(uvIEl);
+                        if(uvIndex <= 2){
+                            uvIEl.classList.add("low");
+                        }
+                        else if (uvIndex > 7){
+                            uvIEl.classList.add("high");
+                        }
+                        else{
+                            uvIEl.classList.add("medium");
+                        }
                     }
                     else{
                         weatherULEl[i].innerHTML= "<li><label>Date:</label>"+dateFormatted+"</li> <li><img src='https://openweathermap.org/img/wn/"+iconID.toString()+".png'></li> <li>Temp: "+tempDay.toString()+"</li> <li>Wind: "+windSpeed.toString()+" MPH</li> <li>Humidity: "+humid.toString()+"%</li>"
                     }
                 };
-                return;
             })
             
         }
@@ -119,12 +126,10 @@ function savedSearches(){
     var newSearch=[searchCity];
     var currentList = localStorage.savedCity
     var savedCity= JSON.parse(currentList);
-    
     if(!savedCity.includes(searchCity)){
-    savedCity= savedCity.concat(newSearch);
-    localStorage.savedCity= JSON.stringify(savedCity);
+        savedCity= savedCity.concat(newSearch);
+        localStorage.savedCity= JSON.stringify(savedCity);
     };
-    
     makeSavedBtns();
 };    
   
@@ -143,13 +148,15 @@ function makeSavedBtns(){
         };
         console.log(savedBtnCity);
         saveBtnEl.innerHTML= savedBtnCity;
-        var savedBtn= document.getElementsByClassName("saved");
+        savedBtn= document.getElementsByClassName("saved");
+        findBtns();
     };
 };
 
 currentLocal();
 makeSavedBtns();
 var savedBtn= document.getElementsByClassName("saved");
+findBtns();
 
 searchBtn.addEventListener("click",function(){
     console.log("clicked");
@@ -162,17 +169,12 @@ searchBtn.addEventListener("click",function(){
     };
 });
 
-for(i=0; i< savedBtn.length; i++){
-    savedBtn[i].addEventListener("click",function(){
-        searchCity= saveBtn.innerHTML;
-        getLetLon(searchCity);
+function findBtns(){
+    Array.from(savedBtn).forEach(function(index){
+        index.addEventListener("click",function(){
+            console.log(this.innerHTML);
+            searchCity=this.innerText;
+            getLatLon(searchCity);
+        });
     });
-
-// Array.from(savedBtn).forEach(function(index){
-//     index.addEventListener("click",function(){
-//         console.log(this.innerHTML);
-//         searchCity=this.innerText;
-//         getLatLon(searchCity);
-//     });
-// }
-// );
+};

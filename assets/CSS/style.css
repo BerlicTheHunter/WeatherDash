@@ -17,7 +17,9 @@ header{
 }
 
 ul{
+    width:fit-content;
     list-style-type: none;
+
 }
 
 .futureCard{
@@ -31,3 +33,27 @@ li{
 label{
     margin-right: 15px;
 }
+
+.low{
+    
+    background-color: greenyellow;
+}
+
+.medium{
+    background-color: orange;
+}
+
+.high{
+    background-color: red;
+}
+
+.searchLabel{
+    color: black;
+}
+
+
+
+
+
+
+
