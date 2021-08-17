@@ -12,9 +12,9 @@ The Work Event Planner is a project assigned as part of the GTPE Coding bootcamp
 
 
 ### Links
-[WorkEventPlanner App](https://berlicthehunter.github.io/WeatherDash/)
+[Weather Dash App](https://berlicthehunter.github.io/WeatherDash/)
 
-[WorkEventPlanner Github](https://github.com/BerlicTheHunter/WeatherDash)
+[Weather Dash Github](https://github.com/BerlicTheHunter/WeatherDash)
 
 ### Language
 * HTML
